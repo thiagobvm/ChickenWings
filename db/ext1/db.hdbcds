@@ -1,6 +1,0 @@
-in package ext1;
-using tables.Airport;
-
-extend entity tables.Airport with {
-    INTERNATIONAL : Boolean;
-}

@@ -7,6 +7,7 @@
 		"file_name":"Airport.csv",
 		"has_header":false,
 		"dialect":"HANA",
+		"no_data_import": false,
 		"type_config":{
 		"delimiter":","
 	}
