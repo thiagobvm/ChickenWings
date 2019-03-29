@@ -1,13 +1,12 @@
 {
 	"format_version":1,
 	"imports":[{
-	"target_table":"Airport",
+	"target_table":"ChickenWings.db::tables.Airport",
 	"source_data":{
 	"data_type":"CSV",
 		"file_name":"Airport.csv",
 		"has_header":false,
 		"dialect":"HANA",
-		"no_data_import": false,
 		"type_config":{
 		"delimiter":","
 	}

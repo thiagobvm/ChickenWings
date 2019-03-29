@@ -1,5 +1,6 @@
+namespace ChickenWings.db;
 in package ChickenWings.db.ext1;
-using Airport;
+using ChickenWings.db::tables.Airport;
 
 extend entity Airport with {
     INTERNATIONAL : Boolean;
