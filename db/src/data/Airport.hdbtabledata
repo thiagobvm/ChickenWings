@@ -1,10 +1,13 @@
+/*
+em file_name, suprimir o src
+*/
 {
 	"format_version":1,
 	"imports":[{
 	"target_table":"ChickenWings.db::tables.Airport",
 	"source_data":{
 	"data_type":"CSV",
-		"file_name":"Airport.csv",
+		"file_name":"ChickenWings.db.data::Airport.csv",
 		"has_header":false,
 		"dialect":"HANA",
 		"type_config":{
