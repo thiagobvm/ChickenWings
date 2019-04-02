@@ -1,81 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="ChickenWings.db.models::CVAirport" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
-<descriptions defaultDescription="CVAirport.hdbcalculationview"/>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="ChickenWings.db.models::CVAirport2" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVAirport2.hdbcalculationview"/>
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="ChickenWings.db::tables.Airport">
-    <resourceUri>ChickenWings.db::tables.Airport</resourceUri>
+  <DataSource id="ChickenWings.db.models::CVAirport">
+    <resourceUri>ChickenWings.db.models::CVAirport</resourceUri>
+  </DataSource>
+  <DataSource id="ChickenWings.db::tables.Connection">
+    <resourceUri>ChickenWings.db::tables.Connection</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
-  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="leftOuter">
     <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT"/>
+      </viewAttribute>
+      <viewAttribute id="FROMAP">
+        <descriptions defaultDescription="FROMAP"/>
+      </viewAttribute>
+      <viewAttribute id="TOAP">
+        <descriptions defaultDescription="TOAP"/>
+      </viewAttribute>
+      <viewAttribute id="DEPT">
+        <descriptions defaultDescription="DEPT"/>
+      </viewAttribute>
       <viewAttribute id="CODE">
         <descriptions defaultDescription="CODE"/>
       </viewAttribute>
       <viewAttribute id="NAME">
         <descriptions defaultDescription="NAME"/>
       </viewAttribute>
-      <viewAttribute id="CITY">
-        <descriptions defaultDescription="CITY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FROMAP" source="FROMAP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOAP" source="TOAP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPT" source="DEPT"/>
+    </input>
+    <input node="ChickenWings.db.models::CVAirport">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CODE" source="CODE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FROMAP" source="CODE"/>
+    </input>
+    <joinAttribute name="FROMAP"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT"/>
       </viewAttribute>
-      <viewAttribute id="COUNTRY">
-        <descriptions defaultDescription="COUNTRY"/>
+      <viewAttribute id="FROMAP">
+        <descriptions defaultDescription="FROMAP"/>
       </viewAttribute>
-      <viewAttribute id="TIMEZONE">
-        <descriptions defaultDescription="TIMEZONE"/>
+      <viewAttribute id="TOAP">
+        <descriptions defaultDescription="TOAP"/>
       </viewAttribute>
-      <viewAttribute id="LOCATION">
-        <descriptions defaultDescription="LOCATION"/>
+      <viewAttribute id="DEPT">
+        <descriptions defaultDescription="DEPT"/>
       </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes/>
     <restrictedViewAttributes/>
-    <input node="ChickenWings.db::tables.Airport">
-      <mapping xsi:type="Calculation:AttributeMapping" target="CODE" source="CODE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="TIMEZONE" source="TIMEZONE"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+    <input node="ChickenWings.db::tables.Connection">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FROMAP" source="FROMAP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOAP" source="TOAP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DEPT" source="DEPT"/>
     </input>
   </calculationView>
 </calculationViews>
-<inlineHierarchy xsi:type="Dimension:LeveledHierarchy" id="Geography" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="LEVEL_NAME_ENFORCED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
-  <descriptions defaultDescription="Geography"/>
-  <unassignedMemberProperties mode="FALSE"/>
-  <levels>
-    <level levelAttribute="COUNTRY" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="COUNTRY" sortDirection="ASC"/>
-    <level levelAttribute="CITY" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="CITY" sortDirection="ASC"/>
-    <level levelAttribute="CODE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="CODE" sortDirection="ASC"/>
-  </levels>
-</inlineHierarchy>
-<logicalModel id="Projection_1">
+<logicalModel id="Join_1">
   <attributes>
-    <attribute id="NAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="NAME"/>
-      <keyMapping columnObjectName="Projection_1" columnName="NAME"/>
+    <attribute id="FLIGHT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLIGHT"/>
+      <keyMapping columnObjectName="Join_1" columnName="FLIGHT"/>
     </attribute>
-    <attribute id="CITY" order="2" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CITY"/>
-      <keyMapping columnObjectName="Projection_1" columnName="CITY"/>
+    <attribute id="FROMAP" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FROMAP"/>
+      <keyMapping columnObjectName="Join_1" columnName="FROMAP"/>
     </attribute>
-    <attribute id="COUNTRY" order="3" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="COUNTRY"/>
-      <keyMapping columnObjectName="Projection_1" columnName="COUNTRY"/>
+    <attribute id="TOAP" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TOAP"/>
+      <keyMapping columnObjectName="Join_1" columnName="TOAP"/>
     </attribute>
-    <attribute id="TIMEZONE" order="4" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="TIMEZONE"/>
-      <keyMapping columnObjectName="Projection_1" columnName="TIMEZONE"/>
+    <attribute id="DEPT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEPT"/>
+      <keyMapping columnObjectName="Join_1" columnName="DEPT"/>
     </attribute>
-    <attribute id="LOCATION" order="5" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="LOCATION"/>
-      <keyMapping columnObjectName="Projection_1" columnName="LOCATION"/>
-    </attribute>
-    <attribute id="CODE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CODE" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CODE"/>
-      <keyMapping columnObjectName="Projection_1" columnName="CODE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CODE"/>
+    </attribute>
+    <attribute id="NAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
@@ -89,8 +111,20 @@
       <upperLeftCorner x="40" y="85"/>
     </shape>
   
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="203"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="ChickenWings.db.models::CVAirport" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
     <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="65" y="218"/>
+      <upperLeftCorner x="100" y="309"/>
       <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>
